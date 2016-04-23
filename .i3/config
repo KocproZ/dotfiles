@@ -13,9 +13,11 @@ set $work10 10:
 
 ##### Autostart #######
 exec /home/kacper/.screenlayout/2mon.sh
-exec feh --bg-max /home/kacper/Pictures/nm.png
+#exec feh --bg-max /home/kacper/Pictures/nm.png
+exec nitrogen --restore
 exec compton -b -f
 exec twmnd
+exec xinput --set-prop 11 "Device Accel Constant Deceleration" 1.8
 
 ##### Randoms ########
 floating_modifier Mod4
@@ -25,10 +27,8 @@ new_window none
 hide_edge_borders both
 
 ######## Rofi ###########
-bindsym Mod4+d exec rofi -show run -font "pango:System San Francisco Display 14" -opacity 80 -i -bc "#f0f1f2" -bw 1 -bg "#111133" -bgalt "#222244" -fg "#ffffff" -hlbg "11aa11" -fg-active "#ffffff" -hlbg-active "#00dd00" -bg-active "#101077" -hlfg-active "#000000" -hlfg "#000000" -bg-urgent "#cc2222" -fg-urgent "#ffffff" -hlbg-urgent "#ee0000" -hlfg-urgent "#000000" -hide-scrollbar -lines 12 -location 2 -sidebar-mode
-
-###### Rofi desktop ######
-bindsym Mod4+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -opacity 80 -show run -p "Desktop:" -font "pango:System San Francisco Display 14" -bc "#f0f1f2" -bw 1 -bg "#111133" -bgalt "#222244" -fg "#ffffff" -hlbg "11aa11" -fg-active "#ffffff" -hlbg-active "#00dd00" -bg-active "#101077" -hlfg-active "#000000" -hlfg "#000000" -bg-urgent "#cc2222" -fg-urgent "#ffffff" -hlbg-urgent "#ee0000" -hlfg-urgent "#000000" -hide-scrollbar -lines 12 -location 2 -sidebar-mode' 
+bindsym Mod4+d exec rofi -show run
+bindsym Mod4+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu'
 
 ###### Container managment ########
 bindsym Mod4+Left         focus left
@@ -59,8 +59,8 @@ bindsym XF86MonBrightnessUp   exec xbacklight -inc 5 # increase brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease brightness
 
 ###### Screenshots ######
-bindsym --release Print exec scrot 'screenshot_%F_%T.png' -e 'mv $f ~/Screenshots/ & twmnc -t "Printscreen" -c "Saved screenshot." & exec scp /home/kacper/Screenshots/$f www@kocproz.ovh:/home/www/scrshu.kocproz.ovh & echo "http://scrshu.kocproz.ovh/$f" | xsel --clipboard'
-bindsym --release Shift+Print exec scrot -s 'screenshot_%F_%T_$wx$h.png' -e 'mv $f ~/Screenshots/ & twmnc -t "Printscreen" -c "Saved $wx$h screenshot." & exec scp /home/kacper/Screenshots/$f www@kocproz.ovh:/home/www/scrshu.kocproz.ovh & echo "http://scrshu.kocproz.ovh/$f" | xsel --clipboard'
+bindsym --release Print exec ~/.i3/screenshot.sh full
+bindsym --release Shift+Print exec ~/.i3/screenshot.sh selective
 
 ######## Workspaces ######
 bindsym Mod4+1     workspace $work1
