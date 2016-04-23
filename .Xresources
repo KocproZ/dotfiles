@@ -1,0 +1,23 @@
+;=== ROFI ====
+rofi.lines:          12
+rofi.font:           pango:System San Francisco Display 14
+rofi.opacity:        80
+rofi.case-sensitive: false
+rofi.bc:             #f0f1f2
+rofi.bw:             1
+rofi.bg:             #111133
+rofi.bgalt:          #222244
+rofi.fg:             #ffffff
+rofi.hlbg:           #11aa11
+rofi.fg-active:      #ffffff
+rofi.hlbg-active:    #00dd00
+rofi.bg-active:      #101077
+rofi.hlfg-active:    #000000
+rofi.hlfg:           #000000
+rofi.bg-urgent:      #cc2222
+rofi.fg-urgent:      #ffffff
+rofi.hlbg-urgent:    #ee0000
+rofi.hlfg-urgent:    #000000
+rofi.hide-scrollbar: false
+rofi.location:       2
+rofi.sidebar-mode:   true
