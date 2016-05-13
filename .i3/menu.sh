@@ -1,11 +1,25 @@
 #!/bin/bash
-choice=$(echo -e "say apple\nsay poop" | rofi -dmenu)
-if [ "$choice" = "say apple" ] 
+
+screenshot="Take screenshot"
+screenshotsel="Take screenshot (selective)"
+twomon="2 Monitors"
+onemon="1 Monitor"
+
+choice=$(echo -e "$screenshot\n$screenshotsel\n$twomon\n$onemon" | rofi -dmenu)
+if [ "$choice" = "$screenshot" ] 
 then
-  echo "I say apple"
-elif [ "$choice" = "say poop" ] 
+  sleep 1
+  exec ~/.i3/screenshot.sh full
+elif [ "$choice" = "$screenshotsel" ] 
 then
-  echo "I say poop"
+  sleep 1
+  exec ~/.i3/screenshot.sh selective
+elif [ "$choice" = "$twomon" ]
+then
+  exec ~/.screenlayout/2mon.sh
+elif [ "$choice" = "$onemon" ] 
+then
+  exec ~/.screenlayout/1mon.sh
 else
   echo $choice
 fi

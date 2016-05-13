@@ -12,23 +12,26 @@ set $work9 9:
 set $work10 10:
 
 ##### Autostart #######
-exec /home/kacper/.screenlayout/2mon.sh
+exec ~/.screenlayout/2mon.sh
 #exec feh --bg-max /home/kacper/Pictures/nm.png
 exec nitrogen --restore
 exec compton -b -f
 exec twmnd
+exec redshift-gtk
 exec xinput --set-prop 11 "Device Accel Constant Deceleration" 1.8
 
 ##### Randoms ########
 floating_modifier Mod4
-bindsym Mod4+Return exec terminator
+#bindsym Mod4+Return exec terminator
+bindsym Mod4+Return exec urxvt
 bindsym Mod4+Shift+q kill
+bindsym Mod4+s exec ~/.i3/menu.sh
 new_window none
 hide_edge_borders both
 
 ######## Rofi ###########
 bindsym Mod4+d exec rofi -show run
-bindsym Mod4+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu'
+bindsym Mod4+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -p "Desktop:"'
 
 ###### Container managment ########
 bindsym Mod4+Left         focus left
@@ -61,6 +64,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease brightness
 ###### Screenshots ######
 bindsym --release Print exec ~/.i3/screenshot.sh full
 bindsym --release Shift+Print exec ~/.i3/screenshot.sh selective
+bindsym --release Ctrl+Print exec ~/.i3/screenshot.sh window
 
 ######## Workspaces ######
 bindsym Mod4+1     workspace $work1
@@ -93,12 +97,13 @@ assign [class="csgo_linux"]  $work4
 assign [class="jetbrains-idea"] $work6
 assign [class="Rhythmbox"]   $work9
 assign [class="Spotify"]     $work9
-
+#for_window [class="Tilda"]   floating disable; move up; resize set 1366 6
+for_window [class="gimp"]    floating disable
 ########### reloading/restarting ######
-bindsym Mod4+l        exec /home/kacper/.i3/lock.sh
+bindsym Mod4+l        exec ~/.i3/lock.sh
 bindsym Mod4+Shift+c  reload
 bindsym Mod4+Shift+r  restart
-bindsym Mod4+Shift+e  exec "i3-nagbar -t warning -m 'What do you want?' -b 'Close i3' 'exit' -b 'reboot' 'reboot' -b 'Shutdown' 'systemctl poweroff'"
+bindsym Mod4+Shift+e  exec "i3-nagbar -t warning -m 'What do you want?' -b 'Close i3' 'quit' -b 'reboot' 'reboot' -b 'Shutdown' 'systemctl poweroff'"
 
 ####### Modes ##########
 mode "resize" {
