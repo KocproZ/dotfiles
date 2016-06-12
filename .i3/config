@@ -18,7 +18,7 @@ exec nitrogen --restore
 exec compton -b -f
 exec twmnd
 exec redshift-gtk
-exec xinput --set-prop 11 "Device Accel Constant Deceleration" 1.8
+exec xinput --set-prop 11 "Device Accel Constant Deceleration" 1.4
 
 ##### Randoms ########
 floating_modifier Mod4
@@ -103,7 +103,7 @@ for_window [class="gimp"]    floating disable
 bindsym Mod4+l        exec ~/.i3/lock.sh
 bindsym Mod4+Shift+c  reload
 bindsym Mod4+Shift+r  restart
-bindsym Mod4+Shift+e  exec "i3-nagbar -t warning -m 'What do you want?' -b 'Close i3' 'quit' -b 'reboot' 'reboot' -b 'Shutdown' 'systemctl poweroff'"
+bindsym Mod4+Shift+e  exec "i3-nagbar -t warning -m 'What do you want?' -b 'Kill Xorg' 'killall xinit' -b 'reboot' 'reboot' -b 'Shutdown' 'systemctl poweroff'"
 
 ####### Modes ##########
 mode "resize" {
