@@ -28,6 +28,7 @@ bindsym Mod4+Shift+q kill
 bindsym Mod4+s exec ~/.i3/menu.sh
 new_window none
 hide_edge_borders both
+mouse_warping none
 
 ######## Rofi ###########
 bindsym Mod4+d exec rofi -show run
@@ -58,8 +59,8 @@ bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5% #
 bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle # mute
 
 ######### Screen ########
-bindsym XF86MonBrightnessUp   exec xbacklight -inc 5 # increase brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease brightness
+bindsym XF86MonBrightnessUp   exec xbacklight -inc 1 # increase brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease brightness
 
 ###### Screenshots ######
 bindsym --release Print exec ~/.i3/screenshot.sh full
@@ -97,8 +98,12 @@ assign [class="csgo_linux"]  $work4
 assign [class="jetbrains-idea"] $work6
 assign [class="Rhythmbox"]   $work9
 assign [class="Spotify"]     $work9
+for_window [class="Spotify"] move container to $work9
 #for_window [class="Tilda"]   floating disable; move up; resize set 1366 6
 for_window [class="gimp"]    floating disable
+for_window [title="TeamViewer Panel"] floating enable
+for_window [title="TeamViewer Panel (minimized)"] floating enable
+
 ########### reloading/restarting ######
 bindsym Mod4+l        exec ~/.i3/lock.sh
 bindsym Mod4+Shift+c  reload
@@ -130,6 +135,7 @@ bindsym Mod4+r mode "resize"
 
 ###### Bar #######
 bar {
+	#status_command goi3bar -config-path /home/kacper/.i3/config.json
         status_command i3status
 	tray_output LVDS1
 	strip_workspace_numbers yes	
