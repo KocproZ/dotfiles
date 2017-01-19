@@ -1,0 +1,12 @@
+#!/bin/bash
+if [ "$1" != "" ]; then
+  if [ "$2" != "" ]; then
+    cp $1 /tmp/$2
+    scp /tmp/$2 kocproz@kocproz.ovh:/home/www/static.kocproz.ovh/ & twmnc -t "SCP" -c "Sending file $1 as $2"
+    echo "http://static.kocproz.ovh/$2" | xsel --clipboard
+  else
+    echo "put <file> <name_on_server> - put file on server."
+  fi
+else
+    echo "put <file> <name_on_server> - put file on server."
+fi

@@ -1,0 +1,182 @@
+####### KocproZ's i3 config file ########
+font pango:System San Francisco Display 8
+
+#### Variables #####
+set $work1 1:
+set $work2 2:
+set $work3 3:
+set $work4 4:
+set $work5 5:
+set $work6 6:
+set $work7 7:
+set $work9 9:
+set $work10 10:
+
+##### Autostart #######
+exec ~/.screenlayout/2mon.sh
+#exec feh --bg-max /home/kacper/Pictures/nm.png
+exec nitrogen --restore
+exec compton -b -f
+exec twmnd
+exec redshift-gtk
+exec_allways xinput --set-prop 11 "Device Accel Constant Deceleration" 1.4
+
+##### Randoms ########
+floating_modifier    Mod4
+#bindsym Mod4+Return  exec terminator
+bindsym Mod4+Return  exec urxvt
+bindsym Mod4+Shift+q kill
+bindsym Mod4+s       exec ~/.i3/menu.sh
+new_window none
+hide_edge_borders both
+mouse_warping none
+
+######## Rofi ###########
+bindsym Mod4+d exec rofi -show run
+bindsym Mod4+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -p "Desktop:"'
+
+###### Container managment ########
+bindsym Mod4+Left         focus left
+bindsym Mod4+Down         focus down
+bindsym Mod4+Up           focus up
+bindsym Mod4+Right        focus right
+
+bindsym Mod4+Shift+Left   move left
+bindsym Mod4+Shift+Down   move down
+bindsym Mod4+Shift+Up     move up
+bindsym Mod4+Shift+Right  move right
+
+bindsym Mod4+h            split h
+bindsym Mod4+v            split v
+bindsym Mod4+f            fullscreen toggle
+bindsym Mod4+w            layout tabbed
+bindsym Mod4+e            layout toggle split
+bindsym Mod4+Shift+space  floating toggle
+bindsym Mod4+space        focus mode_toggle
+
+######### Audio ##########
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +5% #increase volume
+bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5% #decrease volume
+bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle # mute
+
+######### Screen ########
+bindsym XF86MonBrightnessUp   exec xbacklight -inc 1 # increase brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease brightness
+
+###### Screenshots ######
+bindsym --release Print exec ~/.i3/screenshot.sh full
+bindsym --release Shift+Print exec ~/.i3/screenshot.sh selective
+bindsym --release Ctrl+Print exec ~/.i3/screenshot.sh window
+
+######## Workspaces ######
+bindsym Mod4+1     workspace $work1
+bindsym Mod4+2     workspace $work2
+bindsym Mod4+3     workspace $work3
+bindsym Mod4+4     workspace $work4
+bindsym Mod4+5     workspace $work5
+bindsym Mod4+6     workspace $work6
+bindsym Mod4+7     workspace $work7
+bindsym Mod4+9     workspace $work9
+bindsym Mod4+0     workspace $work10
+bindsym Mod4+p     move workspace to output right
+bindsym Mod4+o     move workspace to output left
+
+bindsym Mod4+Shift+1     move container to workspace $work1
+bindsym Mod4+Shift+2     move container to workspace $work2
+bindsym Mod4+Shift+3     move container to workspace $work3
+bindsym Mod4+Shift+4     move container to workspace $work4
+bindsym Mod4+Shift+5     move container to workspace $work5
+bindsym Mod4+Shift+6     move container to workspace $work6
+bindsym Mod4+Shift+7     move container to workspace $work7
+bindsym Mod4+Shift+9     move container to workspace $work9
+bindsym Mod4+Shift+0     move container to workspace $work10
+bindsym Mod4+Shift+o     move container to workspace prev
+bindsym Mod4+Shift+p     move container to workspace next
+
+bindsym Mod4+Tab workspace next_on_output
+workspace_auto_back_and_forth yes
+
+assign [class="TeamSpeak 3"] $work1
+assign [class="chromium"]    $work2
+assign [class="Firefox"]     $work2
+assign [class="Steam"]       $work3
+assign [class="jetbrains-idea"] $work6
+assign [class="keepass2"]    $work7
+assign [class="Spotify"]     $work9
+assign [class="sonata"]      $work9
+assign [class="cantata"]     $work9
+for_window [class="Spotify"] move window to $work9
+for_window [class="gimp"]    floating disable
+for_window [title="TeamViewer Panel"] floating enable
+for_window [title="TeamViewer Panel (minimized)"] floating enable
+
+########### reloading/restarting ######
+bindsym Mod4+l        exec ~/.i3/lock.sh
+bindsym Mod4+Shift+c  reload
+bindsym Mod4+Shift+r  restart
+bindsym Mod4+Shift+e  exec "i3-nagbar -t warning -m 'What do you want?' -b 'Kill Xorg' 'killall xinit' -b 'reboot' 'reboot' -b 'Shutdown' 'systemctl poweroff'"
+
+####### Modes ##########
+mode "resize" {
+        bindsym Left       resize grow width 10 px or 10 ppt
+        bindsym Down       resize shrink height 10 px or 10 ppt
+        bindsym Up         resize grow height 10 px or 10 ppt
+        bindsym Right      resize shrink width 10 px or 10 ppt
+
+	bindsym Mod4+r mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "media" {
+	bindsym space      exec playerctl -p mopidy play-pause
+	bindsym Left       exec playerctl -p mopidy previous
+	bindsym Right      exec playerctl -p mopidy next
+	bindsym Up         exec playerctl -p mopidy volume 0.05+
+	bindsym Down       exec playerctl -p mopidy volume 0.05-
+	bindsym Ctrl+Left  exec playerctl -p mopidy position 5-
+	bindsym Ctrl+Right exec playerctl -p mopidy position 5+
+
+	bindsym Mod4+a mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym Mod4+a mode "media"
+bindsym Mod4+r mode "resize"
+
+###### Bar #######
+bar {
+	#status_command i3blocks
+        status_command i3status
+	tray_output LVDS1
+	strip_workspace_numbers yes	
+	position bottom
+	font pango:System San Francisco Display 8
+
+	colors{
+		background #111133
+		statusline #ffffff
+		separator #ff00ff
+		
+		focused_workspace #00ff00 #11aa11 #000000
+		inactive_workspace #0000aa #666699 #111111
+		urgent_workspace #ff0000 #660000 #e0e0e0
+	}
+}
+#bar {
+#	status_command i3status
+#	strip_workspace_numbers yes
+#  
+#	font pango:System San Francisco Display 8
+#
+#
+#	colors{
+#		background #111133
+#		statusline #ffffff
+#		separator #ff00ff
+#		
+#		focused_workspace #00ff00 #11aa11 #000000
+#		inactive_workspace #0000aa #666699 #111111
+#		urgent_workspace #ff0000 #660000 #e0e0e0
+#	}
+#
+#}
