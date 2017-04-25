@@ -16,7 +16,7 @@ set $work10 10:
 exec ~/.screenlayout/2mon.sh
 #exec feh --bg-max /home/kacper/Pictures/nm.png
 exec nitrogen --restore
-exec compton -b -f
+#exec compton -b -f
 exec twmnd
 exec redshift-gtk
 exec_allways xinput --set-prop 11 "Device Accel Constant Deceleration" 1.4
@@ -112,6 +112,7 @@ for_window [title="TeamViewer Panel (minimized)"] floating enable
 
 ########### reloading/restarting ######
 bindsym Mod4+l        exec ~/.i3/lock.sh
+bindsym Mod4+Shift+l  exec ~/.i3/lock_matrix.sh
 bindsym Mod4+Shift+c  reload
 bindsym Mod4+Shift+r  restart
 bindsym Mod4+Shift+e  exec "i3-nagbar -t warning -m 'What do you want?' -b 'Kill Xorg' 'killall xinit' -b 'reboot' 'reboot' -b 'Shutdown' 'systemctl poweroff'"
@@ -163,20 +164,15 @@ bar {
 	}
 }
 #bar {
-#	status_command i3status
+#	status_command i3blocks
 #	strip_workspace_numbers yes
-#  
 #	font pango:System San Francisco Display 8
-#
-#
 #	colors{
 #		background #111133
 #		statusline #ffffff
-#		separator #ff00ff
-#		
+#		separator #ff00ff	
 #		focused_workspace #00ff00 #11aa11 #000000
 #		inactive_workspace #0000aa #666699 #111111
 #		urgent_workspace #ff0000 #660000 #e0e0e0
 #	}
-#
 #}
